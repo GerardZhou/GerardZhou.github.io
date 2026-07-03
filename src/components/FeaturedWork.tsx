@@ -13,9 +13,9 @@ export function FeaturedWork({ items }: FeaturedWorkProps) {
     <section className="content-section work-section" id="selected-work">
       <SectionHeading
         index="01"
-        kicker="Selected evidence"
-        title="Work that holds up under scrutiny."
-        description="A focused set of systems and products, framed around the problem, the engineering decision, and the measurable result."
+        kicker="Selected work"
+        title="Experience & Projects"
+        description="Internships and projects connecting engineering decisions to measurable outcomes."
       />
 
       <div className="work-list">

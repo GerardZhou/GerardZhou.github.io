@@ -183,7 +183,7 @@ export const featuredWork = [
   },
   {
     id: "soapbox",
-    title: "Mobile and API foundations for volunteer impact",
+    title: "Mobile and API platform for nonprofit volunteer coordination",
     organization: "Soapbox",
     kind: "experience",
     role: "Software Engineer Intern",

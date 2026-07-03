@@ -12,9 +12,8 @@ export function CapabilityMap({ groups }: CapabilityMapProps) {
     <section className="content-section capability-section" id="capabilities">
       <SectionHeading
         index="03"
-        kicker="Capability map"
-        title="Skills, connected to where they were used."
-        description="No keyword wall. Every capability points back to a system, project, or outcome shown above."
+        kicker="Skills"
+        title="Technical Skills"
       />
 
       <div className="capability-grid">
@@ -25,12 +24,12 @@ export function CapabilityMap({ groups }: CapabilityMapProps) {
             {/* padStart gives every generated index the same two-character width. */}
             <span className="capability-index">C{String(index + 1).padStart(2, "0")}</span>
             <h3>{group.title}</h3>
-            <p>{group.summary}</p>
             <ul className="capability-skills" aria-label={`${group.title} skills`}>
               {group.skills.map((skill) => (
                 <li key={skill}>{skill}</li>
               ))}
             </ul>
+            <p>{group.summary}</p>
             <div className="capability-evidence">
               <span>Evidence</span>
               {/* These fragment links send visitors to the relevant project or experience card. */}

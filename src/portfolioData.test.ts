@@ -79,4 +79,12 @@ describe("portfolio data invariants", () => {
       "Designing a CI/CD release path to automate a 45-minute manual workflow, targeting a reduction to 5 minutes—an 89% improvement.",
     );
   });
+
+  it("uses the approved nonprofit-focused Soapbox title", () => {
+    const soapbox = featuredWork.find((item) => item.id === "soapbox");
+
+    expect(soapbox?.title).toBe(
+      "Mobile and API platform for nonprofit volunteer coordination",
+    );
+  });
 });

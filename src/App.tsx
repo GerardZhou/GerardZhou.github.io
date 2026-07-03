@@ -107,9 +107,8 @@ function App() {
           </div>
           <div className="personal-copy">
             <p>
-              Outside engineering, I reset through movement, good food, and long
-              trails—and keep the analytical edge sharp through competitive
-              programming.
+              Outside engineering, I reset through weightlifting, cooking, and long
+              trails, with the occasional competitive programming problem.
             </p>
             <ul aria-label="Personal interests">
               {personalInterests.map((interest) => (
