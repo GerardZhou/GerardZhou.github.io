@@ -10,99 +10,36 @@ import {
   experienceTimeline,
   externalLinks,
   featuredWork,
+  personalInterests,
+  profile,
+  proofPoints,
 } from "./portfolioData";
+import { Workbench } from "./workbench/Workbench";
 
-// These headline numbers give a recruiter useful evidence before they scroll.
-// `as const` tells TypeScript to keep the exact values instead of widening every
-// string to the general `string` type.
-const proofPoints = [
-  {
-    value: ">70%",
-    label: "less configuration effort",
-    context: "IBM operator workflow",
-  },
-  {
-    value: "45 min",
-    label: "manual workflow targeted",
-    context: "OCI release automation",
-  },
-  {
-    value: "20+",
-    label: "backend endpoints shipped",
-    context: "Soapbox platform",
-  },
-  {
-    value: "04",
-    label: "engineering internships",
-    context: "cloud to product",
-  },
-] as const;
-
-// The hero's right-hand panel is intentionally a compact index rather than a
-// second skills list. Each row previews a theme supported later on the page.
-const evidenceRows = [
-  { id: "01", title: "Kubernetes operator", detail: "Go · CRDs", status: "shipped" },
-  { id: "02", title: "Release automation", detail: "IaC · CI/CD", status: "in flight" },
-  { id: "03", title: "Product backend", detail: "20+ endpoints", status: "shipped" },
-  { id: "04", title: "Analytical core", detail: "Probability · LA", status: "active" },
-] as const;
-
-// Looking profile links up once keeps the JSX below readable. The non-null
-// assertion (`!`) is safe because `portfolioData.test.ts` locks the link list.
+// Looking links up once avoids scattering public destinations across the page.
+// The data test protects this allowlist, so these assertions remain deliberate.
 const linkById = {
   github: externalLinks.find((link) => link.id === "github")!,
   linkedin: externalLinks.find((link) => link.id === "linkedin")!,
+  email: externalLinks.find((link) => link.id === "email")!,
 };
 
-// This graphic is decorative rather than a real measurement, so it is hidden
-// from screen readers. The interactive chart in SignalLab includes full labels.
-function SignalPlot() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="signal-plot"
-      preserveAspectRatio="none"
-      viewBox="0 0 540 130"
-    >
-      <defs>
-        <linearGradient id="signal-fill" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0" stopColor="currentColor" stopOpacity="0.24" />
-          <stop offset="1" stopColor="currentColor" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <path
-        className="signal-area"
-        d="M0 105 24 99 48 103 72 79 96 83 120 60 144 66 168 41 192 47 216 55 240 35 264 50 288 28 312 36 336 21 360 43 384 30 408 50 432 35 456 21 480 31 504 14 540 24V130H0Z"
-      />
-      <path
-        className="signal-line"
-        d="M0 105 24 99 48 103 72 79 96 83 120 60 144 66 168 41 192 47 216 55 240 35 264 50 288 28 312 36 336 21 360 43 384 30 408 50 432 35 456 21 480 31 504 14 540 24"
-      />
-      <circle className="signal-point" cx="504" cy="14" r="4" />
-    </svg>
-  );
-}
-
-// App is the page-level composition component. Detailed sections live in their
-// own files, while this component controls their order and the hero content.
 function App() {
   return (
     <div className="site-shell">
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="GZ — Gerard Zhou, home">
+        <a className="wordmark" href="#top" aria-label="Gerard Zhou, home">
           <span className="wordmark-mark">GZ</span>
           <span className="wordmark-name">Gerard Zhou</span>
         </a>
 
         <nav className="desktop-nav" aria-label="Primary navigation">
+          <a href="#workbench">Workbench</a>
           <a href="#selected-work">Work</a>
-          <a href="#signal-lab">Lab</a>
           <a href="#experience">Experience</a>
           <a href="#contact">Contact</a>
         </nav>
 
-        {/* This wrapper leaves room for future header actions without coupling
-            the sticky-header layout to one particular link. */}
         <div className="header-actions">
           <span className="availability">
             <span aria-hidden="true" className="availability-dot" />
@@ -112,23 +49,15 @@ function App() {
       </header>
 
       <main id="main-content">
-        {/* The opening viewport answers three recruiter questions quickly:
-            who Gerard is, what he builds, and where the supporting proof lives. */}
         <section className="hero" id="top" aria-labelledby="hero-heading">
           <div className="hero-copy">
-            <p className="eyebrow">CS @ UT Austin · Software Engineering @ OCI</p>
-            <h1 id="hero-heading">
-              Engineering reliable systems for the moments that <em>matter.</em>
-            </h1>
-            <p className="hero-intro">
-              I’m Gerard, a computer science student and software engineer working across
-              infrastructure, platforms, and products—with a bias for rigorous thinking and
-              measurable outcomes.
-            </p>
+            <p className="eyebrow">{profile.eyebrow}</p>
+            <h1 id="hero-heading">{profile.headline}</h1>
+            <p className="hero-intro">{profile.introduction}</p>
 
-            <div className="hero-actions" aria-label="Primary links">
-              <a className="button button-primary" href="#selected-work">
-                Explore selected work
+            <div className="hero-actions" aria-label="Primary actions">
+              <a className="button button-primary" href="#workbench">
+                Open engineering workbench
                 <ArrowDownIcon />
               </a>
               <a
@@ -140,54 +69,35 @@ function App() {
                 GitHub
                 <ArrowUpRightIcon />
               </a>
-              <a
-                className="button button-secondary"
-                href={linkById.linkedin.href}
-                rel="noreferrer"
-                target="_blank"
-              >
-                LinkedIn
+              <a className="button button-secondary" href={linkById.email.href}>
+                Email
                 <ArrowUpRightIcon />
               </a>
             </div>
           </div>
 
-          <aside className="evidence-panel" aria-labelledby="evidence-title">
-            <div className="panel-header">
+          <aside className="hero-portrait-card" aria-label="Gerard Zhou profile">
+            <div className="portrait-frame">
+              <img
+                alt="Gerard Zhou wearing professional attire"
+                fetchPriority="high"
+                height="1000"
+                src={profile.portraitSrc}
+                width="800"
+              />
+              <div className="portrait-scan-line" aria-hidden="true" />
+            </div>
+            <div className="portrait-card-footer">
               <div>
-                <p className="panel-kicker">Evidence index</p>
-                <h2 id="evidence-title">Systems profile</h2>
+                <span className="portrait-status-dot" aria-hidden="true" />
+                <p>Current</p>
               </div>
-              <span className="panel-live">
-                <span aria-hidden="true" /> Current
-              </span>
-            </div>
-
-            <div className="evidence-list">
-              {evidenceRows.map((row) => (
-                <div className="evidence-row" key={row.id}>
-                  <span className="row-id">{row.id}</span>
-                  <span className="row-title">{row.title}</span>
-                  <span className="row-detail">{row.detail}</span>
-                  <span className={`row-status row-status-${row.status.replace(" ", "-")}`}>
-                    {row.status}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <div className="plot-wrap">
-              <div className="plot-labels">
-                <span>Scope / compounding</span>
-                <span>2024—26</span>
-              </div>
-              <SignalPlot />
+              <strong>Software Engineering @ OCI</strong>
+              <span>Austin, TX · UT Austin CS</span>
             </div>
           </aside>
         </section>
 
-        {/* Mapping data to repeated cards avoids copying the same HTML four
-            times and makes future metric edits a content-only change. */}
         <section className="proof-strip" aria-label="Selected impact metrics">
           {proofPoints.map((point) => (
             <article className="proof-point" key={point.value}>
@@ -198,12 +108,31 @@ function App() {
           ))}
         </section>
 
-        {/* Each section receives typed data as props. This one-way flow—data to
-            component to HTML—is the central React pattern used in this project. */}
+        <Workbench />
         <FeaturedWork items={featuredWork} />
         <SignalLab />
         <ExperienceTimeline items={experienceTimeline} />
         <CapabilityMap groups={capabilityGroups} />
+
+        <section className="personal-section" aria-labelledby="personal-heading">
+          <div>
+            <p className="section-number">05 / Beyond code</p>
+            <h2 id="personal-heading">Curiosity needs somewhere to go.</h2>
+          </div>
+          <div className="personal-copy">
+            <p>
+              Outside engineering, I reset through movement, good food, and long
+              trails—and keep the analytical edge sharp through competitive
+              programming.
+            </p>
+            <ul aria-label="Personal interests">
+              {personalInterests.map((interest) => (
+                <li key={interest}>{interest}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
         <EducationContact education={education} links={externalLinks} />
       </main>
     </div>

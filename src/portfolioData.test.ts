@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { externalLinks } from "./portfolioData";
+import {
+  capabilityGroups,
+  externalLinks,
+  featuredWork,
+  personalInterests,
+  proofPoints,
+} from "./portfolioData";
 
 // These tests protect the public-link allowlist. They make privacy changes
 // deliberate: adding a new destination requires reviewing and updating the
@@ -24,5 +30,44 @@ describe("public portfolio links", () => {
 
     expect(profileLinks).toHaveLength(2);
     expect(profileLinks.every((link) => link.href.startsWith("https://"))).toBe(true);
+  });
+});
+
+describe("portfolio data invariants", () => {
+  it("keeps featured work IDs unique", () => {
+    const ids = featuredWork.map((item) => item.id);
+
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+
+  it("keeps proof-point values unique and non-empty", () => {
+    expect(new Set(proofPoints.map((item) => item.value)).size).toBe(
+      proofPoints.length,
+    );
+    expect(
+      proofPoints.every((item) => item.label.length > 0 && item.context.length > 0),
+    ).toBe(true);
+  });
+
+  it("points capability evidence at known page anchors", () => {
+    const knownAnchors = new Set([
+      "#education",
+      ...featuredWork.map((item) => `#work-${item.id}`),
+      "#experience-truce",
+    ]);
+    const evidenceLinks = capabilityGroups.flatMap((group) =>
+      group.evidence.map((item) => item.href),
+    );
+
+    expect(evidenceLinks.every((href) => knownAnchors.has(href))).toBe(true);
+  });
+
+  it("includes only the approved personal interests", () => {
+    expect(personalInterests).toEqual([
+      "Hiking",
+      "Weightlifting",
+      "Cooking",
+      "Competitive programming",
+    ]);
   });
 });

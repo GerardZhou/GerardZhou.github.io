@@ -4,12 +4,13 @@ This guide explains the portfolio as if you are new to React, TypeScript, Vite, 
 
 ## The shortest mental model
 
-The project has four layers:
+The project has five layers:
 
 1. **Content** lives mainly in `src/portfolioData.ts`.
 2. **React components** in `src/` turn that content into HTML.
 3. **CSS** in `src/styles.css` controls how the HTML looks at different screen sizes.
-4. **Vite** builds those source files into the static `dist/` folder that GitHub Pages publishes.
+4. **Workbench logic** in `src/workbench/` controls applications, windows, and terminal commands.
+5. **Vite** builds those source files into the static `dist/` folder that GitHub Pages publishes.
 
 The browser follows this path when it loads the site:
 
@@ -21,11 +22,24 @@ src/main.tsx
 src/App.tsx
     ├── reads arrays and objects from src/portfolioData.ts
     ├── renders the hero and impact strip
+    ├── renders Workbench.tsx
     └── passes data into section components
             ↓
         React creates browser HTML
             ↓
         src/styles.css styles that HTML
+```
+
+The workbench has a deliberately separate state path:
+
+```text
+dock or terminal action
+    ↓
+windowManagerReducer(...) in src/workbench/windowManager.ts
+    ↓ returns the next open/focused/moved window list
+Workbench.tsx
+    ↓ renders accessible window chrome and application content
+browser
 ```
 
 The interactive queue lab has one extra path:
@@ -47,8 +61,12 @@ browser
 | File | What it is responsible for |
 | --- | --- |
 | `src/portfolioData.ts` | Experience, projects, skills, education, and external links. Start here for most wording changes. |
-| `src/App.tsx` | The overall page order plus the hero, evidence panel, and impact metrics. |
+| `src/App.tsx` | The overall page order plus the recruiter hero, portrait, impact strip, and personal section. |
 | `src/styles.css` | Colors, spacing, typography, layouts, responsive rules, and reduced-motion rules. |
+| `src/workbench/Workbench.tsx` | Desktop workbench composition and window-state ownership. |
+| `src/workbench/workbench.css` | Laptop, windows, dock, terminal, and mobile command-deck styles. |
+| `src/workbench/windowManager.ts` | Pure open/focus/close/move/maximize/restore behavior. |
+| `src/workbench/terminal.ts` | The safe allowlisted terminal command parser. |
 | `src/SignalLab.tsx` | The interactive lab controls and the way simulation results are displayed. |
 | `src/simulation.ts` | The deterministic queue model and its calculations. |
 | `src/simulation.test.ts` | Automated checks that protect the simulation from regressions. |
@@ -63,6 +81,17 @@ browser
 | `src/components/EducationContact.tsx` | Education, contact links, and footer. |
 | `src/components/SectionHeading.tsx` | Shared heading layout used by several sections. |
 | `src/components/Icons.tsx` | Small SVG arrow icons. |
+
+### Workbench components
+
+| File | Responsibility |
+| --- | --- |
+| `src/workbench/appRegistry.ts` | Labels, descriptions, glyphs, and default window sizes for every application. |
+| `src/workbench/DesktopWindow.tsx` | Accessible window chrome and constrained pointer dragging. |
+| `src/workbench/Dock.tsx` | Desktop application launchers and reviewed profile links. |
+| `src/workbench/WorkbenchAppContent.tsx` | Content rendered inside each application. |
+| `src/workbench/TerminalApp.tsx` | Terminal input, history, and reviewed application/external actions. |
+| `src/workbench/MobileCommandDeck.tsx` | Touch-first full-screen applications below the desktop breakpoint. |
 
 ### Entry points and configuration
 
@@ -148,11 +177,13 @@ After changing a link, click it in the local preview. A syntactically valid URL 
 
 ### Change the headline or top-of-page metrics
 
-Open `src/App.tsx`:
+Open `src/portfolioData.ts`:
 
-- `proofPoints` drives the four-number impact strip.
-- `evidenceRows` drives the systems-profile panel.
-- the `<section className="hero">` block contains the main headline and introduction.
+- `profile` drives the hero and System Overview identity copy.
+- `proofPoints` drives the four-number impact strip and overview metrics.
+- `personalInterests` drives the Beyond Code section.
+
+The `<section className="hero">` block in `src/App.tsx` controls the composition.
 
 Keep every public metric precise and supportable. Do not publish confidential implementation details merely to make a description sound more technical.
 
@@ -189,6 +220,28 @@ The lab uses a fixed random seed, so the same inputs produce the same outputs. T
 
 The lab is deliberately described as a synthetic educational model. Do not relabel its output as production telemetry or a real-world benchmark.
 
+### Change the workbench applications or terminal
+
+Start with `src/workbench/appRegistry.ts`. Every internal app needs a unique ID,
+label, short glyph, description, and default geometry. Then add its content case
+to `WorkbenchAppContent.tsx`.
+
+Terminal commands are defined in `src/workbench/terminal.ts`. The parser is an
+allowlist: every command maps to fixed text, a known internal application, or a
+reviewed profile destination. Never pass terminal input to `eval`, a shell, raw
+HTML, or a URL constructor. Update `terminal.test.ts` with every command change.
+
+Window behavior belongs in the pure reducer, not React event handlers. Add a
+reducer action only when the state transition is reusable and testable.
+
+### Replace the profile picture
+
+1. Prepare a professional head-and-shoulders image with a 4:5 aspect ratio.
+2. Export it as `public/gerard-zhou-headshot.jpg`; everything in `public/` is published directly.
+3. Keep the file near 200 KB when possible without visible facial artifacts.
+4. Preserve the 800 by 1000 dimensions in `src/App.tsx`, or update the image's `width` and `height` attributes to match the new file.
+5. Run the production build and inspect both the hero and the About/System Overview application on desktop and mobile.
+
 ## Accessibility choices worth preserving
 
 - `index.html` includes a skip link so keyboard users can bypass navigation.
@@ -196,6 +249,8 @@ The lab is deliberately described as a synthetic educational model. Do not relab
 - Form controls in the lab use labels and descriptions.
 - Charts have accessible titles/descriptions, while purely decorative graphics use `aria-hidden="true"`.
 - Focus styles remain visible for keyboard navigation.
+- Workbench windows use native buttons, named controls, and focus restoration.
+- Mobile applications lock background scrolling and return focus to their launcher.
 - the reduced-motion media query removes nonessential motion for users who request it.
 
 When adding a new interactive element, use a native HTML element (`button`, `a`, `input`) whenever possible. Native elements already provide keyboard and assistive-technology behavior that a clickable `div` does not.
@@ -240,42 +295,6 @@ What each command does:
 - `pnpm preview` serves that production folder locally so you test what will actually be deployed.
 
 If `pnpm dev` is already running, stop it with <kbd>Control</kbd>+<kbd>C</kbd> in its terminal.
-
-## Adding a résumé later (opt-in)
-
-There is no résumé in the repository or website by default. That reduces the chance of publishing a private phone number, address, stale document, hidden PDF metadata, or confidential work detail.
-
-When you intentionally want to publish one:
-
-1. Make a copy of the final PDF and review the copy page by page.
-2. Check both visible text and PDF metadata. Remove anything you do not want publicly downloadable or searchable.
-3. Rename the reviewed copy to `Gerard-Zhou-Resume.pdf`.
-4. Put it in `public/Gerard-Zhou-Resume.pdf`. Vite copies `public/` files to the root of `dist/`, so the eventual public URL will be `/Gerard-Zhou-Resume.pdf`.
-5. In `src/portfolioData.ts`, add `"resume"` to `ExternalLinkId` and add `"document"` to the `ExternalLink` `kind` union. Then add this object to `externalLinks`:
-
-   ```ts
-   {
-     id: "resume",
-     label: "Résumé",
-     href: "/Gerard-Zhou-Resume.pdf",
-     kind: "document",
-   },
-   ```
-
-   Because `EducationContact` maps over `externalLinks`, this automatically creates a link in the contact section.
-6. If you also want a header link, add this property to `linkById` in `src/App.tsx`:
-
-   ```ts
-   resume: externalLinks.find((link) => link.id === "resume")!,
-   ```
-
-   Then render an anchor with `href={linkById.resume.href}` in the header. Copy the structure of another external link so its icon, `target`, and `rel` behavior stay consistent.
-7. Run the full validation commands.
-8. From `pnpm preview`, click every résumé link and confirm the correct reviewed PDF opens.
-9. Open `dist/Gerard-Zhou-Resume.pdf` directly and confirm its contents one final time.
-10. Use `git status --short` to verify that you are committing only the intended document and code changes.
-
-To unpublish it, delete `public/Gerard-Zhou-Resume.pdf`, remove the `externalLinks` entry, remove any manually added header lookup/link, and rebuild before pushing.
 
 ## How GitHub Pages deployment works
 

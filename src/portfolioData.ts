@@ -3,7 +3,13 @@
 
 // IDs become HTML anchors such as `#work-oracle`, so spelling changes here can
 // also affect links in the capability map.
-export type FeaturedWorkId = "oracle" | "ibm" | "soapbox" | "mobilizeut" | "qrmor";
+export type FeaturedWorkId =
+  | "oracle"
+  | "ibm"
+  | "soapbox"
+  | "mobilizeut"
+  | "qrmor"
+  | "traffic-research";
 
 export type ExperienceId = "oracle" | "ibm" | "soapbox" | "truce";
 
@@ -80,6 +86,53 @@ export interface ExternalLink {
   readonly href: string;
   readonly kind: "profile" | "contact";
 }
+
+export interface ProofPoint {
+  readonly value: string;
+  readonly label: string;
+  readonly context: string;
+}
+
+/** Identity content shared by the hero and the workbench overview application. */
+export const profile = {
+  name: "Gerard Zhou",
+  eyebrow: "CS @ UT Austin · Software Engineering @ OCI",
+  headline: "I build reliable systems from cloud control planes to product APIs.",
+  introduction:
+    "I’m a computer science student and software engineer focused on infrastructure, distributed systems, backend engineering, and developer tools.",
+  location: "Austin, Texas",
+  portraitSrc: "/gerard-zhou-headshot.jpg",
+} as const;
+
+export const proofPoints = [
+  {
+    value: ">70%",
+    label: "less configuration effort",
+    context: "IBM operator workflow",
+  },
+  {
+    value: "45 min",
+    label: "manual workflow targeted",
+    context: "OCI release automation",
+  },
+  {
+    value: "20+",
+    label: "backend endpoints shipped",
+    context: "Soapbox platform",
+  },
+  {
+    value: "04",
+    label: "engineering internships",
+    context: "cloud to product",
+  },
+] as const satisfies readonly ProofPoint[];
+
+export const personalInterests = [
+  "Hiking",
+  "Weightlifting",
+  "Cooking",
+  "Competitive programming",
+] as const;
 
 // `satisfies` validates every object against FeaturedWork without throwing away
 // useful literal types. `readonly` prevents accidental runtime mutation.
@@ -214,6 +267,28 @@ export const featuredWork = [
       label: "View public prototype",
       url: "https://github.com/GerardZhou/QRmor",
       note: "Public prototype repository; production readiness is not claimed.",
+    },
+  },
+  {
+    id: "traffic-research",
+    title: "Route optimization in a simulated traffic network",
+    organization: "University of Houston Research",
+    kind: "project",
+    role: null,
+    timeframe: null,
+    summary:
+      "Explored traffic simulation and route optimization using SUMO and graph-based shortest-path methods.",
+    challenge:
+      "Traffic experiments needed a reproducible way to compare routing behavior under simulated network conditions.",
+    approach:
+      "Modeled road networks in SUMO and applied Dijkstra’s algorithm to reason about route selection and optimization tradeoffs.",
+    result:
+      "Produced a research-oriented simulation workflow for studying how routing decisions affect modeled traffic flow.",
+    technologies: ["Python", "SUMO", "Dijkstra’s algorithm", "Optimization"],
+    code: {
+      visibility: "unavailable",
+      label: "Research materials",
+      note: "No reviewed public source repository is available for this work.",
     },
   },
 ] as const satisfies readonly FeaturedWork[];
@@ -351,7 +426,10 @@ export const capabilityGroups = [
       "Probability",
       "Linear Algebra",
     ],
-    evidence: [{ label: "UT Austin coursework", href: "#education" }],
+    evidence: [
+      { label: "Traffic simulation research", href: "#work-traffic-research" },
+      { label: "UT Austin coursework", href: "#education" },
+    ],
   },
 ] as const satisfies readonly CapabilityGroup[];
 
