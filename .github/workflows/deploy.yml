@@ -1,0 +1,97 @@
+name: Deploy portfolio to GitHub Pages
+
+# Run automatically after main changes, or manually from the Actions tab.
+# The push trigger is deliberately limited to the branch used for production.
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Start every job with read-only repository access. The deploy job receives only
+# the two extra permissions GitHub Pages requires later in this file.
+permissions:
+  contents: read
+
+# Avoid overlapping deployments when several commits are pushed close together.
+# Keeping cancel-in-progress false lets an already-started release finish cleanly.
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  # Validation and compilation happen before any deployment permission is granted.
+  build:
+    name: Validate and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      # Each Actions run starts on a fresh machine, so the repository must be
+      # downloaded before Node can install or build anything.
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          # The workflow only needs to read source; it never pushes Git commits.
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          # Keep this major version compatible with package.json's engines field.
+          node-version: "22"
+          # pnpm is enabled explicitly in the next step, so setup-node does not
+          # manage a second package-manager cache here.
+          package-manager-cache: false
+
+      # Corepack downloads the exact pnpm release declared for this repository.
+      - name: Enable pnpm
+        run: |
+          corepack enable pnpm
+          corepack install --global pnpm@11.7.0
+
+      - name: Install dependencies
+        # Failing on a changed lockfile keeps local and CI dependency trees equal.
+        run: pnpm install --frozen-lockfile
+
+      # These gates must all pass before the static site is eligible to deploy.
+      - name: Lint
+        run: pnpm lint
+
+      - name: Test
+        run: pnpm test
+
+      - name: Build
+        run: pnpm build
+
+      # configure-pages prepares metadata for the current repository's Pages site.
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          # Vite writes the production HTML, CSS, JavaScript, and public assets here.
+          path: dist
+
+  # This job cannot start unless the build job above succeeds.
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      # pages:write publishes the artifact; id-token:write lets GitHub verify this
+      # exact workflow run through OIDC without storing a deployment secret.
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      # GitHub displays the deployed URL on both the job and environment pages.
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        # The id lets the environment URL read this step's page_url output above.
+        id: deployment
+        uses: actions/deploy-pages@v5

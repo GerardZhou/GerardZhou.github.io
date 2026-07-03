@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- This file is standalone because an unknown route may load before React. -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="The requested page could not be found." />
+    <meta name="robots" content="noindex, follow" />
+    <meta name="theme-color" content="#0a0f10" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>Page not found — Gerard Zhou</title>
+    <style>
+      /* Shared visual tokens for this one page. Main-site CSS is not assumed. */
+      :root {
+        color-scheme: dark;
+        color: #edf2ed;
+        background: #0a0f10;
+        font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-synthesis: none;
+      }
+
+      /* Include borders and padding inside declared element dimensions. */
+      * {
+        box-sizing: border-box;
+      }
+
+      /* Layer subtle grids and a glow over the dark fallback background. */
+      body {
+        min-width: 320px;
+        min-height: 100vh;
+        margin: 0;
+        background:
+          linear-gradient(rgba(132, 232, 208, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(132, 232, 208, 0.035) 1px, transparent 1px),
+          radial-gradient(circle at 78% 18%, rgba(30, 117, 104, 0.2), transparent 30rem),
+          #0a0f10;
+        background-size: 64px 64px, 64px 64px, auto, auto;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      a:focus-visible {
+        outline: 2px solid #84e8d0;
+        outline-offset: 4px;
+      }
+
+      /* Center the page while keeping comfortable gutters on narrow screens. */
+      .shell {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        width: min(100% - 2rem, 1428px);
+        min-height: 100vh;
+        margin: 0 auto;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        min-height: 88px;
+        border-bottom: 1px solid rgba(218, 231, 224, 0.14);
+      }
+
+      .wordmark {
+        display: inline-flex;
+        gap: 0.8rem;
+        align-items: center;
+        font: 600 0.92rem/1 "SFMono-Regular", Consolas, monospace;
+        letter-spacing: -0.03em;
+        text-decoration: none;
+      }
+
+      .mark {
+        display: grid;
+        place-items: center;
+        width: 2.15rem;
+        aspect-ratio: 1;
+        border: 1px solid rgba(218, 231, 224, 0.26);
+        color: #84e8d0;
+        font-size: 0.68rem;
+        font-weight: 700;
+      }
+
+      main {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: clamp(2rem, 8vw, 8rem);
+        align-items: center;
+        padding: clamp(4rem, 10vh, 8rem) 0;
+      }
+
+      .eyebrow {
+        margin: 0 0 1.4rem;
+        color: #84e8d0;
+        font: 650 0.72rem/1 "SFMono-Regular", Consolas, monospace;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 800px;
+        margin: 0;
+        font-family: Iowan Old Style, Baskerville, "Times New Roman", serif;
+        font-size: clamp(3.5rem, 8vw, 7.5rem);
+        font-weight: 400;
+        line-height: 0.94;
+        letter-spacing: -0.065em;
+      }
+
+      h1 em {
+        color: #f1864b;
+        font-weight: 400;
+      }
+
+      .message {
+        max-width: 620px;
+        margin: 2rem 0 0;
+        color: #aab6b0;
+        font-size: clamp(1rem, 2vw, 1.15rem);
+        line-height: 1.7;
+      }
+
+      .home-link {
+        display: inline-flex;
+        gap: 0.75rem;
+        align-items: center;
+        min-height: 48px;
+        margin-top: 2.25rem;
+        padding: 0 1.25rem;
+        border: 1px solid #edf2ed;
+        color: #0a0f10;
+        background: #edf2ed;
+        font: 650 0.72rem/1 "SFMono-Regular", Consolas, monospace;
+        letter-spacing: 0.04em;
+        text-decoration: none;
+        transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+      }
+
+      .home-link:hover {
+        border-color: #84e8d0;
+        background: #84e8d0;
+        transform: translateY(-2px);
+      }
+
+      .code {
+        color: rgba(237, 242, 237, 0.06);
+        font: 700 clamp(8rem, 24vw, 22rem)/0.75 "SFMono-Regular", Consolas, monospace;
+        letter-spacing: -0.1em;
+        user-select: none;
+      }
+
+      /* Stack the decorative 404 above the explanation on small displays. */
+      @media (max-width: 760px) {
+        main {
+          grid-template-columns: 1fr;
+        }
+
+        .copy {
+          grid-row: 2;
+        }
+
+        .code {
+          grid-row: 1;
+          font-size: clamp(7rem, 42vw, 12rem);
+        }
+      }
+
+      /* Respect the operating-system setting for reduced interface motion. */
+      @media (prefers-reduced-motion: reduce) {
+        .home-link {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- The wordmark always gives the visitor a direct path back home. -->
+    <div class="shell">
+      <header class="header">
+        <a class="wordmark" href="/" aria-label="Gerard Zhou, portfolio home">
+          <span class="mark" aria-hidden="true">GZ</span>
+          <span>Gerard Zhou</span>
+        </a>
+      </header>
+
+      <!-- This content remains useful even if application JavaScript fails. -->
+      <main>
+        <div class="copy">
+          <p class="eyebrow">HTTP / 404 · Signal not found</p>
+          <h1>This route lost the <em>signal.</em></h1>
+          <p class="message">
+            The address may have changed, or the page may no longer exist. The portfolio is one
+            step away.
+          </p>
+          <a class="home-link" href="/">Return to the portfolio <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="code" aria-hidden="true">404</div>
+      </main>
+    </div>
+  </body>
+</html>

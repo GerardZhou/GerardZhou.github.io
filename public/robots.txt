@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gerardzhou.github.io/sitemap.xml
