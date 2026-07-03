@@ -124,7 +124,8 @@
   font-weight: 720;
 }
 
-.wb-menu-bar time {
+.wb-menu-context {
+  font: inherit;
   text-align: right;
 }
 
@@ -531,7 +532,6 @@
   line-height: 1.55;
 }
 
-.wb-lab-panel,
 .wb-contact-panel {
   display: grid;
   align-content: center;
@@ -651,7 +651,7 @@
     grid-template-columns: auto 1fr;
   }
 
-  .wb-menu-bar time {
+  .wb-menu-context {
     justify-self: end;
   }
 

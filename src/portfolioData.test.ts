@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   capabilityGroups,
+  experienceTimeline,
   externalLinks,
   featuredWork,
   personalInterests,
@@ -69,5 +70,13 @@ describe("portfolio data invariants", () => {
       "Cooking",
       "Competitive programming",
     ]);
+  });
+
+  it("describes the OCI automation result as a target", () => {
+    const oracle = experienceTimeline.find((item) => item.id === "oracle");
+
+    expect(oracle?.highlights).toContain(
+      "Designing a CI/CD release path to automate a 45-minute manual workflow, targeting a reduction to 5 minutes—an 89% improvement.",
+    );
   });
 });

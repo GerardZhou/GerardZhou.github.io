@@ -92,7 +92,7 @@ export function Workbench() {
             <div className="wb-menu-bar">
               <strong>GerardOS</strong>
               <span>Engineering workbench</span>
-              <time dateTime="2026-07-03">Austin · available for internships</time>
+              <small className="wb-menu-context">Austin · Computer Science @ UT Austin</small>
             </div>
             <div className="wb-wallpaper-copy" aria-hidden="true">
               <span>Gerard Zhou</span>

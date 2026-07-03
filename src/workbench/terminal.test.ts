@@ -21,10 +21,11 @@ describe("runTerminalCommand", () => {
       kind: "open-app",
       appId: "experience",
     });
-    expect(runTerminalCommand("lab")).toMatchObject({
-      kind: "open-app",
-      appId: "lab",
-    });
+  });
+
+  it("treats the removed lab command as unknown", () => {
+    expect(terminalCommandNames).not.toContain("lab");
+    expect(runTerminalCommand("lab").lines[0]).toContain("Command not found");
   });
 
   it("returns reviewed external destinations instead of arbitrary URLs", () => {

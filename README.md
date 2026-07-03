@@ -2,7 +2,7 @@
 
 [![Deploy portfolio to GitHub Pages](https://github.com/GerardZhou/GerardZhou.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/GerardZhou/GerardZhou.github.io/actions/workflows/deploy.yml)
 
-A recruiter-first software engineering portfolio with an interactive MacBook workbench, production systems evidence, measurable outcomes, and a deterministic reliability lab.
+A recruiter-first software engineering portfolio with an interactive MacBook workbench, production systems evidence, and measurable outcomes.
 
 **Live site:** [gerardzhou.github.io](https://gerardzhou.github.io/)
 

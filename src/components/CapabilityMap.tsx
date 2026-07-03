@@ -11,7 +11,7 @@ export function CapabilityMap({ groups }: CapabilityMapProps) {
   return (
     <section className="content-section capability-section" id="capabilities">
       <SectionHeading
-        index="04"
+        index="03"
         kicker="Capability map"
         title="Skills, connected to where they were used."
         description="No keyword wall. Every capability points back to a system, project, or outcome shown above."

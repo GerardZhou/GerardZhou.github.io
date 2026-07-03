@@ -11,7 +11,7 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
   return (
     <section className="content-section experience-section" id="experience">
       <SectionHeading
-        index="03"
+        index="02"
         kicker="Trajectory"
         title="From application code to cloud control planes."
         description="Four engineering internships, each adding a deeper layer of ownership: test quality, product systems, platform automation, and infrastructure reliability."

@@ -96,7 +96,7 @@ export interface ProofPoint {
 /** Identity content shared by the hero and the workbench overview application. */
 export const profile = {
   name: "Gerard Zhou",
-  eyebrow: "CS @ UT Austin · Software Engineering @ OCI",
+  eyebrow: "CS @ UT Austin · Systems / Infrastructure / Product",
   headline: "I build reliable systems from cloud control planes to product APIs.",
   introduction:
     "I’m a computer science student and software engineer focused on infrastructure, distributed systems, backend engineering, and developer tools.",
@@ -305,7 +305,7 @@ export const experienceTimeline = [
     summary:
       "Designing release automation and isolated test environments for cloud infrastructure changes.",
     highlights: [
-      "Designing a CI/CD release path targeting a roughly 45-minute manual workflow.",
+      "Designing a CI/CD release path to automate a 45-minute manual workflow, targeting a reduction to 5 minutes—an 89% improvement.",
       "Implemented infrastructure-as-code and release configuration changes for dedicated test environments.",
       "Authored a design covering release automation, orchestration, and infrastructure isolation.",
     ],

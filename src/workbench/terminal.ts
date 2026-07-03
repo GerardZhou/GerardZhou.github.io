@@ -22,7 +22,6 @@ const availableCommands = [
   "projects",
   "experience",
   "skills",
-  "lab",
   "contact",
   "github",
   "linkedin",
@@ -66,8 +65,6 @@ export function runTerminalCommand(rawInput: string): TerminalResult {
       return openApp("experience", "Experience");
     case "skills":
       return openApp("skills", "Skills");
-    case "lab":
-      return openApp("lab", "Systems Lab");
     case "contact":
       return openApp("contact", "Contact");
     case "github":
@@ -94,7 +91,7 @@ export function runTerminalCommand(rawInput: string): TerminalResult {
     case "ls":
       return {
         kind: "output",
-        lines: ["about/  projects/  experience/  skills/  systems-lab/  contact/"],
+        lines: ["about/  projects/  experience/  skills/  contact/"],
       };
     case "clear":
       return { kind: "clear", lines: [] };

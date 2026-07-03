@@ -23,4 +23,8 @@ describe("workbench application registry", () => {
   it("includes the default System Overview application", () => {
     expect(workbenchAppById.overview.label).toBe("System Overview");
   });
+
+  it("does not expose the removed queue lab", () => {
+    expect(Object.prototype.hasOwnProperty.call(workbenchAppById, "lab")).toBe(false);
+  });
 });

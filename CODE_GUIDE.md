@@ -42,18 +42,6 @@ Workbench.tsx
 browser
 ```
 
-The interactive queue lab has one extra path:
-
-```text
-slider changes in SignalLab.tsx
-    ↓ update React state
-simulateQueue(...) in simulation.ts
-    ↓ returns metrics, series, and histogram bins
-SignalLab.tsx
-    ↓ redraws the numbers and chart
-browser
-```
-
 ## Project map
 
 ### Files you will edit most often
@@ -67,9 +55,6 @@ browser
 | `src/workbench/workbench.css` | Laptop, windows, dock, terminal, and mobile command-deck styles. |
 | `src/workbench/windowManager.ts` | Pure open/focus/close/move/maximize/restore behavior. |
 | `src/workbench/terminal.ts` | The safe allowlisted terminal command parser. |
-| `src/SignalLab.tsx` | The interactive lab controls and the way simulation results are displayed. |
-| `src/simulation.ts` | The deterministic queue model and its calculations. |
-| `src/simulation.test.ts` | Automated checks that protect the simulation from regressions. |
 
 ### Reusable section components
 
@@ -212,14 +197,6 @@ Do not casually change section `id` values such as `selected-work` or `experienc
 4. Add relevant evidence links in `capabilityGroups` if the project proves a listed skill.
 5. Run the checks and inspect the card on both desktop and mobile.
 
-### Change the interactive lab
-
-Presentation belongs in `src/SignalLab.tsx`; mathematical/model behavior belongs in `src/simulation.ts`.
-
-The lab uses a fixed random seed, so the same inputs produce the same outputs. That repeatability makes the demo easier to explain and test. If you change formulas, limits, stability thresholds, or event ordering, add or update a focused test in `src/simulation.test.ts` before changing the interface copy.
-
-The lab is deliberately described as a synthetic educational model. Do not relabel its output as production telemetry or a real-world benchmark.
-
 ### Change the workbench applications or terminal
 
 Start with `src/workbench/appRegistry.ts`. Every internal app needs a unique ID,
@@ -246,8 +223,6 @@ reducer action only when the state transition is reusable and testable.
 
 - `index.html` includes a skip link so keyboard users can bypass navigation.
 - Sections use real headings in order instead of styled generic text.
-- Form controls in the lab use labels and descriptions.
-- Charts have accessible titles/descriptions, while purely decorative graphics use `aria-hidden="true"`.
 - Focus styles remain visible for keyboard navigation.
 - Workbench windows use native buttons, named controls, and focus restoration.
 - Mobile applications lock background scrolling and return focus to their launcher.
@@ -315,7 +290,7 @@ First-time setup:
 2. Push this project to its `main` branch.
 3. Open **Settings → Pages** and select **GitHub Actions** as the source if needed.
 4. Open **Actions** and inspect the **Deploy portfolio to GitHub Pages** run.
-5. After it succeeds, visit `https://gerardzhou.github.io/` and test navigation, external links, mobile layout, and the queue lab.
+5. After it succeeds, visit `https://gerardzhou.github.io/` and test navigation, external links, the workbench, and the mobile layout.
 
 If deployment fails, open the failed Actions run and expand the first red step. Fix that underlying lint, test, install, or build error locally before pushing again.
 

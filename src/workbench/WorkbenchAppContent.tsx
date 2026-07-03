@@ -26,7 +26,7 @@ function OverviewPanel({ onOpenApp }: Pick<WorkbenchAppContentProps, "onOpenApp"
           width="160"
         />
         <div>
-          <p className="wb-label">Engineer profile / current</p>
+          <p className="wb-label">Engineer profile / overview</p>
           <h3>{profile.name}</h3>
           <p>{profile.introduction}</p>
         </div>
@@ -112,23 +112,6 @@ function ExperiencePanel() {
   );
 }
 
-function LabPanel() {
-  return (
-    <div className="wb-prose-panel wb-lab-panel">
-      <p className="wb-label">Systems lab / deterministic model</p>
-      <h3>When does a healthy queue become fragile?</h3>
-      <p>
-        Explore how demand, capacity, and retry behavior compound into tail latency.
-        The model is synthetic and deliberately scoped—it demonstrates analytical
-        reasoning, not production telemetry.
-      </p>
-      <a className="wb-inline-link" href="#signal-lab">
-        Open the full interactive model <span aria-hidden="true">↓</span>
-      </a>
-    </div>
-  );
-}
-
 function SkillsPanel() {
   return (
     <div className="wb-skill-panel">
@@ -184,8 +167,6 @@ export function WorkbenchAppContent({ appId, onOpenApp }: WorkbenchAppContentPro
       return <WorkPanel />;
     case "experience":
       return <ExperiencePanel />;
-    case "lab":
-      return <LabPanel />;
     case "skills":
       return <SkillsPanel />;
     case "terminal":

@@ -38,13 +38,6 @@ export const workbenchApps = [
     defaultGeometry: { x: 88, y: 52, width: 650, height: 490 },
   },
   {
-    id: "lab",
-    label: "Systems Lab",
-    shortLabel: "LB",
-    description: "An interactive reliability and queueing model.",
-    defaultGeometry: { x: 172, y: 74, width: 600, height: 390 },
-  },
-  {
     id: "skills",
     label: "Skills",
     shortLabel: "SK",

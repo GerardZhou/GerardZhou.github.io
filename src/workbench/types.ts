@@ -4,7 +4,6 @@ export type WorkbenchAppId =
   | "about"
   | "work"
   | "experience"
-  | "lab"
   | "skills"
   | "terminal"
   | "contact";

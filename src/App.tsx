@@ -1,4 +1,3 @@
-import SignalLab from "./SignalLab";
 import { CapabilityMap } from "./components/CapabilityMap";
 import { EducationContact } from "./components/EducationContact";
 import { ExperienceTimeline } from "./components/ExperienceTimeline";
@@ -40,12 +39,6 @@ function App() {
           <a href="#contact">Contact</a>
         </nav>
 
-        <div className="header-actions">
-          <span className="availability">
-            <span aria-hidden="true" className="availability-dot" />
-            Open to internships
-          </span>
-        </div>
       </header>
 
       <main id="main-content">
@@ -85,16 +78,10 @@ function App() {
                 src={profile.portraitSrc}
                 width="800"
               />
-              <div className="portrait-scan-line" aria-hidden="true" />
             </div>
-            <div className="portrait-card-footer">
-              <div>
-                <span className="portrait-status-dot" aria-hidden="true" />
-                <p>Current</p>
-              </div>
-              <strong>Software Engineering @ OCI</strong>
-              <span>Austin, TX · UT Austin CS</span>
-            </div>
+            <p className="portrait-card-footer">
+              Computer Science @ UT Austin · Austin, TX
+            </p>
           </aside>
         </section>
 
@@ -110,13 +97,12 @@ function App() {
 
         <Workbench />
         <FeaturedWork items={featuredWork} />
-        <SignalLab />
         <ExperienceTimeline items={experienceTimeline} />
         <CapabilityMap groups={capabilityGroups} />
 
         <section className="personal-section" aria-labelledby="personal-heading">
           <div>
-            <p className="section-number">05 / Beyond code</p>
+            <p className="section-number">04 / Beyond code</p>
             <h2 id="personal-heading">Curiosity needs somewhere to go.</h2>
           </div>
           <div className="personal-copy">
