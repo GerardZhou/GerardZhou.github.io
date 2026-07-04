@@ -111,9 +111,9 @@ export const proofPoints = [
     context: "IBM operator workflow",
   },
   {
-    value: "45 min",
-    label: "manual workflow targeted",
-    context: "OCI release automation",
+    value: "~89% faster",
+    label: "estimated OCI VCN release workflow",
+    context: "45 min → 5 min via CI/CD automation",
   },
   {
     value: "20+",
