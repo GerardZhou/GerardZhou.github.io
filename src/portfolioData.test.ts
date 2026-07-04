@@ -68,7 +68,9 @@ describe("portfolio data invariants", () => {
       "Hiking",
       "Weightlifting",
       "Cooking",
-      "Competitive programming",
+      "Chess",
+      "Basketball",
+      "Competitive programming",    
     ]);
   });
 
