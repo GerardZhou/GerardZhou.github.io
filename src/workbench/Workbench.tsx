@@ -81,7 +81,7 @@ export function Workbench() {
         </div>
         <p>
           Open applications, move windows, or use the terminal. Every important detail
-          remains available in the recruiter-readable sections below.
+          remains available.
         </p>
       </div>
 

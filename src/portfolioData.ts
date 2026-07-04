@@ -121,7 +121,7 @@ export const proofPoints = [
     context: "Soapbox platform",
   },
   {
-    value: "04",
+    value: "04+",
     label: "engineering internships",
     context: "cloud to product",
   },
@@ -131,6 +131,8 @@ export const personalInterests = [
   "Hiking",
   "Weightlifting",
   "Cooking",
+  "Chess",
+  "Basketball",
   "Competitive programming",
 ] as const;
 
