@@ -97,9 +97,9 @@ export interface ProofPoint {
 export const profile = {
   name: "Gerard Zhou",
   eyebrow: "CS @ UT Austin · Systems / Infrastructure / Product",
-  headline: "I build reliable systems from cloud control planes to product APIs.",
+  headline: "I build reliable systems across cloud infrastructure, CI/CD pipelines, and product APIs.",
   introduction:
-    "I’m a computer science student and software engineer focused on infrastructure, distributed systems, backend engineering, and developer tools.",
+    "I’m a computer science student and software engineer focused on infrastructure, distributed systems, backend engineering, developer tools, and much more.",
   location: "Austin, Texas",
   portraitSrc: "/gerard-zhou-headshot.jpg",
 } as const;
