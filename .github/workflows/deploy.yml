@@ -95,3 +95,7 @@ jobs:
         # The id lets the environment URL read this step's page_url output above.
         id: deployment
         uses: actions/deploy-pages@v5
+      - name: Deploy to GitHub Pages (retry)
+        if: steps.deployment.outcome == 'failure'
+        id: deployment_retry
+        uses: actions/deploy-pages@v5
