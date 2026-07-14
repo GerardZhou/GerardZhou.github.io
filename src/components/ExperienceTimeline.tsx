@@ -14,7 +14,7 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
         index="02"
         kicker="Trajectory"
         title="From application code to cloud control planes."
-        description="Four engineering internships, each adding a deeper layer of ownership: test quality, product systems, platform automation, and infrastructure reliability."
+        description="Five engineering roles, each adding a deeper layer of ownership: algorithms research, test quality, product systems, platform automation, and infrastructure reliability."
       />
 
       {/* An ordered list preserves the timeline's sequence for browsers and assistive technology. */}

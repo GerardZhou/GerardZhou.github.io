@@ -11,7 +11,7 @@ export type FeaturedWorkId =
   | "qrmor"
   | "traffic-research";
 
-export type ExperienceId = "oracle" | "ibm" | "soapbox" | "truce";
+export type ExperienceId = "oracle" | "ibm" | "soapbox" | "truce" | "traffic-research";
 
 // A discriminated union lets TypeScript enforce an important privacy rule:
 // public work must have a URL, while private/unavailable work cannot have one.
@@ -275,7 +275,7 @@ export const featuredWork = [
     id: "traffic-research",
     title: "Route optimization in a simulated traffic network",
     organization: "University of Houston Research",
-    kind: "project",
+    kind: "experience",
     role: null,
     timeframe: null,
     summary:
@@ -354,6 +354,19 @@ export const experienceTimeline = [
       "Applied Ruff and Mypy static analysis across at least four codebases.",
     ],
     technologies: ["Python", "Pytest", "AWS Lambda", "AWS SQS", "Ruff", "Mypy"],
+  },
+  {
+    id: "traffic-research",
+    organization: "University of Houston, Real-Time Systems Lab",
+    role: "Algorithms Research Intern",
+    timeframe: "Jun 2024 - Aug 2024",
+    summary:
+      "Researched traffic-aware vehicle routing optimization and simulation workflows in Python.",
+    highlights: [
+      "Developed a vehicle routing optimization algorithm in Python that achieved 18% higher computational efficiency than Dijkstra's algorithm across urban traffic simulations.",
+      "Implemented SUMO and TraCI traffic simulations to model real-world routing and benchmark algorithmic performance.",
+    ],
+    technologies: ["Python", "SUMO", "TraCI", "Optimization", "Dijkstra's algorithm"],
   },
 ] as const satisfies readonly ExperienceEntry[];
 
