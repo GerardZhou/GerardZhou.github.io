@@ -53,8 +53,10 @@ describe("portfolio data invariants", () => {
   it("points capability evidence at known page anchors", () => {
     const knownAnchors = new Set([
       "#education",
-      ...featuredWork.map((item) => `#work-${item.id}`),
-      "#experience-truce",
+      ...featuredWork
+        .filter((item) => item.kind === "project")
+        .map((item) => `#work-${item.id}`),
+      ...experienceTimeline.map((item) => `#experience-${item.id}`),
     ]);
     const evidenceLinks = capabilityGroups.flatMap((group) =>
       group.evidence.map((item) => item.href),
@@ -88,5 +90,12 @@ describe("portfolio data invariants", () => {
     expect(soapbox?.title).toBe(
       "Mobile and API platform for nonprofit volunteer coordination",
     );
+  });
+
+  it("keeps at least two projects available for the project-card grid", () => {
+    const projects = featuredWork.filter((item) => item.kind === "project");
+
+    expect(projects.length).toBeGreaterThanOrEqual(2);
+    expect(projects.every((item) => item.summary.length > 0)).toBe(true);
   });
 });

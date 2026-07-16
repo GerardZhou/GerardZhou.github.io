@@ -2,7 +2,7 @@
 
 [![Deploy portfolio to GitHub Pages](https://github.com/GerardZhou/GerardZhou.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/GerardZhou/GerardZhou.github.io/actions/workflows/deploy.yml)
 
-A recruiter-first software engineering portfolio with an interactive MacBook workbench, production systems evidence, and measurable outcomes.
+A recruiter-first software engineering portfolio with concise project and experience cards, an interactive MacBook workbench, production systems evidence, and measurable outcomes.
 
 **Live site:** [gerardzhou.github.io](https://gerardzhou.github.io/)
 
@@ -11,10 +11,11 @@ New to the codebase? Start with [`CODE_GUIDE.md`](CODE_GUIDE.md) for a plain-lan
 ## Built for a quick, credible review
 
 - Verified impact is visible before interaction or scrolling deeply.
+- Project and experience cards separate independent work from employment history for faster scanning.
 - The desktop workbench opens typed applications, manages layered windows, and includes a safe local terminal.
 - Experience and projects connect technical choices to outcomes.
 - Mobile uses a dedicated touch-first command deck instead of shrinking the desktop.
-- The interface is semantic, keyboard accessible, responsive, and reduced-motion aware.
+- The nature-inspired interface follows the system light or dark preference and remains keyboard accessible, responsive, and reduced-motion aware.
 - Core content is bundled locally—there is no runtime API, database, analytics tracker, or secret.
 - GitHub Pages serves a static Vite build with a custom 404, sitemap, and crawler rules.
 

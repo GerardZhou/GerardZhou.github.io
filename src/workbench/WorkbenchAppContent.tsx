@@ -74,13 +74,15 @@ function AboutPanel() {
 }
 
 function WorkPanel() {
+  const projects = featuredWork.filter((item) => item.kind === "project");
+
   return (
     <div className="wb-list-panel">
       <div className="wb-list-heading">
         <p className="wb-label">Selected work / evidence index</p>
         <h3>Decisions, systems, outcomes.</h3>
       </div>
-      {featuredWork.map((item, index) => (
+      {projects.map((item, index) => (
         <a href={`#work-${item.id}`} key={item.id}>
           <span>{String(index + 1).padStart(2, "0")}</span>
           <div>

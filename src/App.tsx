@@ -2,7 +2,7 @@ import { CapabilityMap } from "./components/CapabilityMap";
 import { EducationContact } from "./components/EducationContact";
 import { ExperienceTimeline } from "./components/ExperienceTimeline";
 import { FeaturedWork } from "./components/FeaturedWork";
-import { ArrowDownIcon, ArrowUpRightIcon } from "./components/Icons";
+import { ArrowDownIcon, ArrowUpRightIcon, MountainIcon } from "./components/Icons";
 import {
   capabilityGroups,
   education,
@@ -33,9 +33,10 @@ function App() {
         </a>
 
         <nav className="desktop-nav" aria-label="Primary navigation">
-          <a href="#workbench">Workbench</a>
-          <a href="#selected-work">Work</a>
+          <a href="#selected-work">Projects</a>
           <a href="#experience">Experience</a>
+          <a href="#capabilities">Skills</a>
+          <a href="#workbench">Workbench</a>
           <a href="#contact">Contact</a>
         </nav>
 
@@ -44,13 +45,16 @@ function App() {
       <main id="main-content">
         <section className="hero" id="top" aria-labelledby="hero-heading">
           <div className="hero-copy">
-            <p className="eyebrow">{profile.eyebrow}</p>
+            <p className="eyebrow">
+              <MountainIcon />
+              {profile.eyebrow}
+            </p>
             <h1 id="hero-heading">{profile.headline}</h1>
             <p className="hero-intro">{profile.introduction}</p>
 
             <div className="hero-actions" aria-label="Primary actions">
-              <a className="button button-primary" href="#workbench">
-                Open engineering workbench
+              <a className="button button-primary" href="#selected-work">
+                Explore selected projects
                 <ArrowDownIcon />
               </a>
               <a
@@ -80,7 +84,8 @@ function App() {
               />
             </div>
             <p className="portrait-card-footer">
-              Computer Science @ UT Austin · Austin, TX
+              <span>Based in Austin, TX</span>
+              Computer Science @ UT Austin
             </p>
           </aside>
         </section>
@@ -95,20 +100,21 @@ function App() {
           ))}
         </section>
 
-        <Workbench />
         <FeaturedWork items={featuredWork} />
         <ExperienceTimeline items={experienceTimeline} />
         <CapabilityMap groups={capabilityGroups} />
+        <Workbench />
 
         <section className="personal-section" aria-labelledby="personal-heading">
           <div>
-            <p className="section-number">04 / Beyond code</p>
-            <h2 id="personal-heading">Curiosity needs somewhere to go.</h2>
+            <p className="section-number">05 / Beyond code</p>
+            <h2 id="personal-heading">A life beyond the screen.</h2>
           </div>
           <div className="personal-copy">
             <p>
-              Outside engineering, I reset through weightlifting, cooking, chess games, basketball, 
-              long hiking trails, and occasionally solving competitive programming problems.
+              Outside engineering, I reset on long trails, in the gym, and around a table—cooking,
+              playing chess, or watching basketball. Competitive programming keeps the analytical
+              part of my brain moving.
             </p>
             <ul aria-label="Personal interests">
               {personalInterests.map((interest) => (

@@ -42,6 +42,14 @@ export interface FeaturedWork {
   readonly result: string;
   readonly technologies: readonly string[];
   readonly code: CodeAccess;
+  readonly visual?: Readonly<{
+    src: string;
+    alt: string;
+  }>;
+  readonly demo?: Readonly<{
+    label: string;
+    url: string;
+  }>;
 }
 
 export interface ExperienceEntry {
@@ -96,10 +104,10 @@ export interface ProofPoint {
 /** Identity content shared by the hero and the workbench overview application. */
 export const profile = {
   name: "Gerard Zhou",
-  eyebrow: "CS @ UT Austin · Systems / Infrastructure / Product",
-  headline: "I build reliable systems across cloud infrastructure, CI/CD pipelines, and product APIs.",
+  eyebrow: "CS @ UT Austin · Systems, infrastructure, and product",
+  headline: "I build reliable systems for ambitious products.",
   introduction:
-    "I’m a computer science student and software engineer focused on infrastructure, distributed systems, backend engineering, developer tools, and much more.",
+    "I’m a computer science student and software engineer working across cloud infrastructure, distributed systems, backend APIs, and developer tools. I care about clear tradeoffs, measurable outcomes, and software that is easier to operate.",
   location: "Austin, Texas",
   portraitSrc: "/gerard-zhou-headshot.jpg",
 } as const;
@@ -379,8 +387,8 @@ export const capabilityGroups = [
       "Automating repeatable infrastructure change while constraining operational risk.",
     skills: ["Terraform", "CI/CD", "Infrastructure as code", "Environment isolation"],
     evidence: [
-      { label: "Oracle release automation", href: "#work-oracle" },
-      { label: "IBM cross-platform packaging", href: "#work-ibm" },
+      { label: "Oracle release automation", href: "#experience-oracle" },
+      { label: "IBM cross-platform packaging", href: "#experience-ibm" },
     ],
   },
   {
@@ -388,7 +396,7 @@ export const capabilityGroups = [
     summary:
       "Encoding lifecycle operations as declarative resources and reconciliation logic.",
     skills: ["Go", "Kubernetes", "OpenShift", "Operator SDK", "CRDs", "Helm", "OLM"],
-    evidence: [{ label: "IBM Kubernetes operator", href: "#work-ibm" }],
+    evidence: [{ label: "IBM Kubernetes operator", href: "#experience-ibm" }],
   },
   {
     title: "Backend and platform systems",
@@ -404,7 +412,7 @@ export const capabilityGroups = [
       "Cloudflare D1",
     ],
     evidence: [
-      { label: "Soapbox API platform", href: "#work-soapbox" },
+      { label: "Soapbox API platform", href: "#experience-soapbox" },
       { label: "MobilizeUT routing backend", href: "#work-mobilizeut" },
     ],
   },
@@ -415,7 +423,7 @@ export const capabilityGroups = [
     skills: ["React Native", "TypeScript", "REST APIs", "OAuth", "Mapping APIs"],
     evidence: [
       { label: "MobilizeUT accessible routing", href: "#work-mobilizeut" },
-      { label: "Soapbox volunteer app", href: "#work-soapbox" },
+      { label: "Soapbox volunteer app", href: "#experience-soapbox" },
       { label: "QRmor public prototype", href: "#work-qrmor" },
     ],
   },
@@ -426,8 +434,8 @@ export const capabilityGroups = [
     skills: ["Pytest", "Ruff", "Mypy", "Git hooks", "TLS", "Rate limiting"],
     evidence: [
       { label: "TRUCE validation and testing", href: "#experience-truce" },
-      { label: "IBM TLS-secured operator", href: "#work-ibm" },
-      { label: "Soapbox traffic controls", href: "#work-soapbox" },
+      { label: "IBM TLS-secured operator", href: "#experience-ibm" },
+      { label: "Soapbox traffic controls", href: "#experience-soapbox" },
     ],
   },
   {
@@ -442,7 +450,7 @@ export const capabilityGroups = [
       "Linear Algebra",
     ],
     evidence: [
-      { label: "Traffic simulation research", href: "#work-traffic-research" },
+      { label: "Traffic simulation research", href: "#experience-traffic-research" },
       { label: "UT Austin coursework", href: "#education" },
     ],
   },

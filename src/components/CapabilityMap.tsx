@@ -13,7 +13,8 @@ export function CapabilityMap({ groups }: CapabilityMapProps) {
       <SectionHeading
         index="03"
         kicker="Skills"
-        title="Technical Skills"
+        title="Capabilities backed by shipped work."
+        description="Technical breadth matters most when it connects to decisions, systems, and results."
       />
 
       <div className="capability-grid">

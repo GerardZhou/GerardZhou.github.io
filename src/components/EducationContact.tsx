@@ -14,7 +14,7 @@ export function EducationContact({ education, links }: EducationContactProps) {
     <>
       <section className="education-section" id="education">
         <div className="education-label">
-          <span>05</span>
+          <span>06</span>
           <p>Education</p>
         </div>
         <div className="education-main">

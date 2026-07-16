@@ -76,12 +76,12 @@ export function Workbench() {
     <section aria-labelledby="workbench-heading" className="workbench-section" id="workbench">
       <div className="workbench-heading-row">
         <div>
-          <p className="section-number">01 / Engineering workbench</p>
-          <h2 id="workbench-heading">Explore the systems behind the story.</h2>
+          <p className="section-number">04 / Interactive workbench</p>
+          <h2 id="workbench-heading">Take the scenic route through my work.</h2>
         </div>
         <p>
-          Open applications, move windows, or use the terminal. Every important detail
-          remains available.
+          Open an app, move a window, or use the terminal. It is a playful way to explore
+          the same evidence available throughout the page.
         </p>
       </div>
 

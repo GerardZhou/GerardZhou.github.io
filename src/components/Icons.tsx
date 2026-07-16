@@ -18,3 +18,12 @@ export function ArrowDownIcon() {
     </svg>
   );
 }
+
+export function MountainIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24">
+      <path d="m2.5 19 6.2-10 3.1 4.2 2.6-3.4L21.5 19H2.5Z" />
+      <path d="m6.9 12 1.8-3 1.5 2" />
+    </svg>
+  );
+}

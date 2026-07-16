@@ -22,8 +22,8 @@ src/main.tsx
 src/App.tsx
     ├── reads arrays and objects from src/portfolioData.ts
     ├── renders the hero and impact strip
-    ├── renders Workbench.tsx
-    └── passes data into section components
+    ├── passes data into project, experience, and skill sections
+    └── renders Workbench.tsx after the recruiter-first content
             ↓
         React creates browser HTML
             ↓
@@ -60,8 +60,10 @@ browser
 
 | File | Page section |
 | --- | --- |
-| `src/components/FeaturedWork.tsx` | Selected-work case-study cards. |
-| `src/components/ExperienceTimeline.tsx` | Internship timeline. |
+| `src/components/FeaturedWork.tsx` | Filters selected work to the project grid. |
+| `src/components/ProjectCard.tsx` | Reusable visual project card with honest source-code states. |
+| `src/components/ExperienceTimeline.tsx` | Ordered employment history. |
+| `src/components/ExperienceCard.tsx` | Reusable experience card with role, impact, and technologies. |
 | `src/components/CapabilityMap.tsx` | Skill groups linked to supporting evidence. |
 | `src/components/EducationContact.tsx` | Education, contact links, and footer. |
 | `src/components/SectionHeading.tsx` | Shared heading layout used by several sections. |
@@ -176,7 +178,7 @@ Keep every public metric precise and supportable. Do not publish confidential im
 
 Open `src/styles.css`. The custom properties near `:root` are the best starting point for site-wide colors and shared values. Search for the class name from the relevant component to find more specific styling.
 
-The media queries near the end adjust layouts for smaller screens. After a visual change, check at least:
+The default palette is light and the `prefers-color-scheme: dark` block provides the dark palette without JavaScript or stored user data. The media queries near the end adjust layouts for smaller screens. After a visual change, check at least:
 
 - a wide desktop window;
 - a narrow mobile-sized window;
@@ -192,10 +194,11 @@ Do not casually change section `id` values such as `selected-work` or `experienc
 ### Add a selected-work item
 
 1. Add the new identifier to the `FeaturedWorkId` union in `src/portfolioData.ts`.
-2. Add a complete object to `featuredWork` using an existing object as the shape reference.
+2. Add a complete object to `featuredWork` using an existing object as the shape reference. Entries with `kind: "project"` appear in the project-card grid; employment entries belong in `experienceTimeline`.
 3. Use `visibility: "public"` only when the URL is genuinely public and safe to share.
-4. Add relevant evidence links in `capabilityGroups` if the project proves a listed skill.
-5. Run the checks and inspect the card on both desktop and mobile.
+4. Add optional `visual: { src, alt }` and `demo: { label, url }` fields only when a reviewed public screenshot and live deployment exist.
+5. Add relevant evidence links in `capabilityGroups` if the project proves a listed skill.
+6. Run the checks and inspect the card on both desktop and mobile.
 
 ### Change the workbench applications or terminal
 
