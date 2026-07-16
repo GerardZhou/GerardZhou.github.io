@@ -11,7 +11,7 @@ export function CapabilityMap({ groups }: CapabilityMapProps) {
   return (
     <section className="content-section capability-section" id="capabilities">
       <SectionHeading
-        index="03"
+        index="04"
         kicker="Skills"
         title="Capabilities backed by shipped work."
         description="Technical breadth matters most when it connects to decisions, systems, and results."

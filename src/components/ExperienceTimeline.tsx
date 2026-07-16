@@ -12,7 +12,7 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps) {
   return (
     <section className="content-section experience-section" id="experience">
       <SectionHeading
-        index="02"
+        index="03"
         kicker="Experience"
         title="Growing ownership, one system at a time."
         description="My work has moved from algorithms research and test quality to product APIs, Kubernetes automation, and cloud infrastructure."

@@ -2,12 +2,11 @@ import type { FeaturedWork } from "../portfolioData";
 import { ArrowUpRightIcon } from "./Icons";
 
 interface ProjectCardProps {
-  readonly index: number;
   readonly project: FeaturedWork;
 }
 
 /** A visual project summary that keeps public and private code states explicit. */
-export function ProjectCard({ index, project }: ProjectCardProps) {
+export function ProjectCard({ project }: ProjectCardProps) {
   const publicUrl = project.code.visibility === "public" ? project.code.url : null;
 
   return (
@@ -26,10 +25,7 @@ export function ProjectCard({ index, project }: ProjectCardProps) {
         ) : (
           <div className="project-contours" aria-hidden="true" />
         )}
-        <span className="project-index">TRAIL {String(index + 1).padStart(2, "0")}</span>
-        <span className="project-marker" aria-hidden="true">
-          {project.id === "qrmor" ? "QR" : "UT"}
-        </span>
+        <span className="project-index">{project.visualLabel ?? "Selected work"}</span>
         <p>{project.organization}</p>
       </div>
 

@@ -5,6 +5,7 @@ import {
   externalLinks,
   featuredWork,
   personalInterests,
+  profile,
   proofPoints,
 } from "./portfolioData";
 
@@ -92,10 +93,44 @@ describe("portfolio data invariants", () => {
     );
   });
 
-  it("keeps at least two projects available for the project-card grid", () => {
+  it("publishes the nine reviewed project repositories", () => {
     const projects = featuredWork.filter((item) => item.kind === "project");
+    const publicUrls = projects.flatMap((item) =>
+      item.code.visibility === "public" ? [item.code.url] : [],
+    );
 
-    expect(projects.length).toBeGreaterThanOrEqual(2);
+    expect(projects).toHaveLength(9);
     expect(projects.every((item) => item.summary.length > 0)).toBe(true);
+    expect(publicUrls).toEqual([
+      "https://github.com/GerardZhou/resource-hub-for-school",
+      "https://github.com/Longhorn-Developers/Mobilize",
+      "https://github.com/GerardZhou/captain_fanplastic_app",
+      "https://github.com/VishalSurya2773/KingdomBuilder",
+      "https://github.com/GerardZhou/Huffman-Coding",
+      "https://github.com/GerardZhou/CollegeFootballGraphAssignment",
+      "https://github.com/GerardZhou/DoublyLinkedList",
+      "https://github.com/GerardZhou/CNNImageClassifier",
+      "https://github.com/GerardZhou/QRmor",
+    ]);
+  });
+
+  it("uses the approved concise profile copy", () => {
+    expect(profile.headline).toBe("I build reliable systems.");
+    expect(profile.introduction).not.toContain("clear tradeoffs");
+    expect(profile.headline).not.toContain("ambitious products");
+  });
+
+  it("credits Huffman Coding as partner work", () => {
+    const huffman = featuredWork.find((item) => item.id === "huffman-coding");
+
+    expect(huffman?.organization).toContain("Partner project");
+    expect(huffman?.summary).toContain("Partnered");
+  });
+
+  it("preserves the approved AP Resource Hub audience metrics", () => {
+    const resourceHub = featuredWork.find((item) => item.id === "resource-hub");
+
+    expect(resourceHub?.result).toContain("5K+ views");
+    expect(resourceHub?.result).toContain("500+ users");
   });
 });

@@ -7,7 +7,14 @@ export type FeaturedWorkId =
   | "oracle"
   | "ibm"
   | "soapbox"
+  | "resource-hub"
   | "mobilizeut"
+  | "captain-fanplastic"
+  | "kingdom-builder"
+  | "huffman-coding"
+  | "college-football-graph"
+  | "doubly-linked-list"
+  | "cnn-image-classifier"
   | "qrmor"
   | "traffic-research";
 
@@ -42,6 +49,7 @@ export interface FeaturedWork {
   readonly result: string;
   readonly technologies: readonly string[];
   readonly code: CodeAccess;
+  readonly visualLabel?: string;
   readonly visual?: Readonly<{
     src: string;
     alt: string;
@@ -105,9 +113,9 @@ export interface ProofPoint {
 export const profile = {
   name: "Gerard Zhou",
   eyebrow: "CS @ UT Austin · Systems, infrastructure, and product",
-  headline: "I build reliable systems for ambitious products.",
+  headline: "I build reliable systems.",
   introduction:
-    "I’m a computer science student and software engineer working across cloud infrastructure, distributed systems, backend APIs, and developer tools. I care about clear tradeoffs, measurable outcomes, and software that is easier to operate.",
+    "I’m a computer science student and software engineer working across cloud infrastructure, distributed systems, backend APIs, and developer tools.",
   location: "Austin, Texas",
   portraitSrc: "/gerard-zhou-headshot.jpg",
 } as const;
@@ -221,6 +229,30 @@ export const featuredWork = [
     },
   },
   {
+    id: "resource-hub",
+    title: "Free AP study resources, organized for 500+ students",
+    organization: "AP Resource Hub",
+    kind: "project",
+    role: null,
+    timeframe: null,
+    summary:
+      "Launched a course-specific resource hub used by 500+ students and viewed more than 5,000 times.",
+    challenge:
+      "Free AP preparation materials were scattered across dozens of sites, subjects, and formats.",
+    approach:
+      "Built a browsable React and Vite catalog with routed course pages, curated practice resources, contact submissions, and GA4 usage instrumentation.",
+    result:
+      "Reached 5K+ views and 500+ users while giving students one place to discover accessible AP study resources.",
+    technologies: ["React", "Vite", "React Router", "GA4", "EmailJS", "CSS Modules"],
+    visualLabel: "Study library",
+    code: {
+      visibility: "public",
+      label: "View source code",
+      url: "https://github.com/GerardZhou/resource-hub-for-school",
+      note: "Public project repository.",
+    },
+  },
+  {
     id: "mobilizeut",
     title: "Accessibility preferences built into route planning",
     organization: "MobilizeUT · Longhorn Developers",
@@ -243,10 +275,177 @@ export const featuredWork = [
       "Cloudflare D1",
       "OpenRouteService",
     ],
+    visualLabel: "Accessible routes",
     code: {
-      visibility: "unavailable",
-      label: "Team repository",
-      note: "No public source repository is available for this project.",
+      visibility: "public",
+      label: "View team repository",
+      url: "https://github.com/Longhorn-Developers/Mobilize",
+      note: "Public Longhorn Developers team repository.",
+    },
+  },
+  {
+    id: "captain-fanplastic",
+    title: "Cleanup participation and impact, connected end to end",
+    organization: "Captain Fanplastic · Soapbox",
+    kind: "project",
+    role: null,
+    timeframe: null,
+    summary:
+      "Built mobile and backend workflows for environmental cleanup events, material tracking, leaderboards, and participant profiles.",
+    challenge:
+      "Teachers, students, and independent volunteers needed one workflow to create events, join cleanups, and record outcomes.",
+    approach:
+      "Developed an Expo and React Native client with an Express API, Clerk authentication, PostgreSQL data models, role-based access, and Upstash rate limiting.",
+    result:
+      "Delivered cross-platform event participation, material logging, leaderboard, and profile experiences backed by authenticated REST APIs.",
+    technologies: [
+      "React Native",
+      "Expo",
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "Clerk",
+      "Upstash Redis",
+    ],
+    visualLabel: "Cleanup platform",
+    code: {
+      visibility: "public",
+      label: "View source code",
+      url: "https://github.com/GerardZhou/captain_fanplastic_app",
+      note: "Public mobile and backend repository.",
+    },
+  },
+  {
+    id: "kingdom-builder",
+    title: "A tabletop strategy game engine built in Java",
+    organization: "KingdomBuilder · Team project",
+    kind: "project",
+    role: null,
+    timeframe: null,
+    summary:
+      "Co-developed a four-player desktop game with interactive turns, randomized hex maps, special actions, and objective scoring.",
+    challenge:
+      "A rules-heavy board game needed to become a clear, playable desktop experience with coordinated game state.",
+    approach:
+      "Modeled players, cards, hexes, settlements, scoring, and randomized board sectors in Java, then built the interactive interface with Swing and AWT.",
+    result:
+      "Shipped executable builds with multiple map layouts, turn flow, special-location tokens, objective cards, and winner calculation.",
+    technologies: ["Java", "Swing", "AWT", "OOP", "Game state", "Graph modeling"],
+    visualLabel: "Strategy game",
+    code: {
+      visibility: "public",
+      label: "View team repository",
+      url: "https://github.com/VishalSurya2773/KingdomBuilder",
+      note: "Public four-person team repository.",
+    },
+  },
+  {
+    id: "huffman-coding",
+    title: "Lossless compression, built from the bit level up",
+    organization: "Huffman Coding · Partner project",
+    kind: "project",
+    role: null,
+    timeframe: null,
+    summary:
+      "Partnered on a Java compressor and decompressor that converts byte frequencies into compact, prefix-free encodings.",
+    challenge:
+      "A lossless file format needed to preserve arbitrary input while accounting for headers, bit-level output, and malformed compressed data.",
+    approach:
+      "Built Huffman trees with a priority queue, generated encoding maps through traversal, supported count- and tree-based headers, and streamed individual bits during compression and reconstruction.",
+    result:
+      "Validated round-trip compression across text, HTML, image, and benchmark corpora, including 43.2% overall compression on the Calgary dataset.",
+    technologies: [
+      "Java",
+      "Huffman coding",
+      "Priority queues",
+      "Binary trees",
+      "Bit streams",
+      "File I/O",
+    ],
+    visualLabel: "Compression lab",
+    code: {
+      visibility: "public",
+      label: "View partner repository",
+      url: "https://github.com/GerardZhou/Huffman-Coding",
+      note: "Public partner-project repository.",
+    },
+  },
+  {
+    id: "college-football-graph",
+    title: "Ranking college football teams through graph centrality",
+    organization: "College Football Graph",
+    kind: "project",
+    role: null,
+    timeframe: null,
+    summary:
+      "Modeled college football results as a graph to explore how connectivity and shortest paths can produce team rankings.",
+    challenge:
+      "Win-loss totals alone do not express strength of schedule or the relationships connecting teams across a season.",
+    approach:
+      "Implemented weighted and unweighted graph traversal, Dijkstra’s algorithm, all-pairs path analysis, graph diameter, and centrality-based ranking in Java.",
+    result:
+      "Generated computational rankings from 2005, 2008, and 2014 season data and compared them with the corresponding AP polls.",
+    technologies: [
+      "Java",
+      "Graph algorithms",
+      "Dijkstra’s algorithm",
+      "Breadth-first search",
+      "Priority queues",
+    ],
+    visualLabel: "Graph rankings",
+    code: {
+      visibility: "public",
+      label: "View source code",
+      url: "https://github.com/GerardZhou/CollegeFootballGraphAssignment",
+      note: "Public graph-assignment repository.",
+    },
+  },
+  {
+    id: "doubly-linked-list",
+    title: "A generic list engineered for bidirectional traversal",
+    organization: "Doubly Linked List",
+    kind: "project",
+    role: null,
+    timeframe: null,
+    summary:
+      "Implemented a generic Java list from scratch with previous and next links connecting every node.",
+    challenge:
+      "The collection needed predictable insert, removal, range, equality, and iteration behavior without relying on Java’s built-in linked-list implementation.",
+    approach:
+      "Implemented the IList contract, including indexed updates, sublists, range removal, equality, and an iterator with safe element removal.",
+    result:
+      "Completed a reusable collection that searches from the nearest end for indexed access and maintains first, last, size, and neighboring-node invariants.",
+    technologies: ["Java", "Generics", "Data structures", "Iterators", "OOP"],
+    visualLabel: "Data structure",
+    code: {
+      visibility: "public",
+      label: "View source code",
+      url: "https://github.com/GerardZhou/DoublyLinkedList",
+      note: "Public data-structure repository.",
+    },
+  },
+  {
+    id: "cnn-image-classifier",
+    title: "Training a CNN to distinguish cats from dogs",
+    organization: "CNN Image Classifier",
+    kind: "project",
+    role: null,
+    timeframe: null,
+    summary:
+      "Built a TensorFlow image-classification notebook to learn the full workflow from image cleanup through model inference.",
+    challenge:
+      "A small, mixed-format image dataset needed validation, preprocessing, training splits, and a model capable of binary classification.",
+    approach:
+      "Filtered invalid images, created TensorFlow datasets, normalized inputs, and trained a Keras network with three convolution and max-pooling stages followed by dense layers.",
+    result:
+      "Tracked training and validation performance, saved and reloaded the model, and verified predictions on separate cat and dog images.",
+    technologies: ["Python", "TensorFlow", "Keras", "CNNs", "OpenCV", "Jupyter"],
+    visualLabel: "Vision model",
+    code: {
+      visibility: "public",
+      label: "View notebook",
+      url: "https://github.com/GerardZhou/CNNImageClassifier",
+      note: "Public learning-project repository and notebook.",
     },
   },
   {
@@ -272,6 +471,7 @@ export const featuredWork = [
       "VirusTotal API",
       "Google Gemini",
     ],
+    visualLabel: "Link scanner",
     code: {
       visibility: "public",
       label: "View public prototype",
@@ -414,16 +614,18 @@ export const capabilityGroups = [
     evidence: [
       { label: "Soapbox API platform", href: "#experience-soapbox" },
       { label: "MobilizeUT routing backend", href: "#work-mobilizeut" },
+      { label: "Captain Fanplastic API", href: "#work-captain-fanplastic" },
     ],
   },
   {
-    title: "Mobile product engineering",
+    title: "Web and mobile product engineering",
     summary:
-      "Connecting mobile interfaces to mapping, identity, and decision-support services.",
-    skills: ["React Native", "TypeScript", "REST APIs", "OAuth", "Mapping APIs"],
+      "Connecting usable interfaces to mapping, identity, learning, and decision-support services.",
+    skills: ["React", "React Native", "TypeScript", "REST APIs", "OAuth", "Mapping APIs"],
     evidence: [
+      { label: "AP Resource Hub", href: "#work-resource-hub" },
       { label: "MobilizeUT accessible routing", href: "#work-mobilizeut" },
-      { label: "Soapbox volunteer app", href: "#experience-soapbox" },
+      { label: "Captain Fanplastic app", href: "#work-captain-fanplastic" },
       { label: "QRmor public prototype", href: "#work-qrmor" },
     ],
   },
@@ -448,9 +650,12 @@ export const capabilityGroups = [
       "Calculus",
       "Probability",
       "Linear Algebra",
+      "Java",
+      "Object-oriented design",
     ],
     evidence: [
       { label: "Traffic simulation research", href: "#experience-traffic-research" },
+      { label: "KingdomBuilder game engine", href: "#work-kingdom-builder" },
       { label: "UT Austin coursework", href: "#education" },
     ],
   },

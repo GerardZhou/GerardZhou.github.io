@@ -60,7 +60,7 @@ browser
 
 | File | Page section |
 | --- | --- |
-| `src/components/FeaturedWork.tsx` | Filters selected work to the project grid. |
+| `src/components/FeaturedWork.tsx` | Filters selected work into the accessible horizontal project rail and owns its arrow controls. |
 | `src/components/ProjectCard.tsx` | Reusable visual project card with honest source-code states. |
 | `src/components/ExperienceTimeline.tsx` | Ordered employment history. |
 | `src/components/ExperienceCard.tsx` | Reusable experience card with role, impact, and technologies. |
@@ -196,7 +196,7 @@ Do not casually change section `id` values such as `selected-work` or `experienc
 1. Add the new identifier to the `FeaturedWorkId` union in `src/portfolioData.ts`.
 2. Add a complete object to `featuredWork` using an existing object as the shape reference. Entries with `kind: "project"` appear in the project-card grid; employment entries belong in `experienceTimeline`.
 3. Use `visibility: "public"` only when the URL is genuinely public and safe to share.
-4. Add optional `visual: { src, alt }` and `demo: { label, url }` fields only when a reviewed public screenshot and live deployment exist.
+4. Set `visualLabel` to the short eyebrow shown at the top of the card. Add optional `visual: { src, alt }` and `demo: { label, url }` fields only when a reviewed public screenshot and live deployment exist.
 5. Add relevant evidence links in `capabilityGroups` if the project proves a listed skill.
 6. Run the checks and inspect the card on both desktop and mobile.
 

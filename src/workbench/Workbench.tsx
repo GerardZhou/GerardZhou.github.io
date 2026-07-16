@@ -76,7 +76,7 @@ export function Workbench() {
     <section aria-labelledby="workbench-heading" className="workbench-section" id="workbench">
       <div className="workbench-heading-row">
         <div>
-          <p className="section-number">04 / Interactive workbench</p>
+          <p className="section-number">01 / Interactive workbench</p>
           <h2 id="workbench-heading">Take the scenic route through my work.</h2>
         </div>
         <p>

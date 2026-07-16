@@ -100,10 +100,10 @@ function App() {
           ))}
         </section>
 
+        <Workbench />
         <FeaturedWork items={featuredWork} />
         <ExperienceTimeline items={experienceTimeline} />
         <CapabilityMap groups={capabilityGroups} />
-        <Workbench />
 
         <section className="personal-section" aria-labelledby="personal-heading">
           <div>

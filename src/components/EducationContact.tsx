@@ -38,12 +38,7 @@ export function EducationContact({ education, links }: EducationContactProps) {
       </section>
 
       <section className="contact-section" id="contact">
-        <p className="contact-kicker">Build what matters</p>
-        <h2>Looking for an engineer who can move between rigor and execution?</h2>
-        <p className="contact-copy">
-          I’m open to quantitative engineering and software engineering internship
-          conversations. Let’s talk about difficult systems and useful products.
-        </p>
+        <h2>Connect with me</h2>
         <div className="contact-links">
           {links.map((link) => (
             // Web URLs open in a new tab; mailto links stay in the current browsing context.
